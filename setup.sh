@@ -120,15 +120,15 @@ function install_deps {
    fi
 
    if [[ "$distro" == "debian" ]]; then 
-      apt-get install "$debian_deps"
+      apt-get install $debian_deps
    fi
 
    if [[ "$distro" == "arch" ]]; then 
-      pacman -Sy "$arch_deps"
+      pacman -Sy $arch_deps
    fi
 
    if [[ "$distro" == "gentoo" ]]; then 
-      emerge -av "$gentoo_deps"
+      emerge -av $gentoo_deps
    fi
 
    if [[ "$distro" == "unknown" ]]; then 
@@ -140,22 +140,24 @@ function install_deps {
 function install_configs {
    cp -R dist/server_cfg/apache $config_dir
    cp -R dist/server_cfg/lighttpd $config_dir
+
+   # ln -f  will overwrite existing links
    
-   if [ "$distro" -eq "fedora" ]; then 
-      ln -s /etc/laudio/apache/laudio.conf /etc/httpd/conf.d/laudio_apache.conf 
+   if [ "$distro" == "fedora" ]; then 
+      ln -fs /etc/laudio/apache/laudio.conf /etc/httpd/conf.d/laudio_apache.conf 
    fi
 
-   if [ "$distro" -eq "debian" ]; then 
-      ln -s /etc/laudio/apache/laudio.conf /etc/apache2/conf.d/laudio_apache.conf 
+   if [ "$distro" == "debian" ]; then 
+      ln -fs /etc/laudio/apache/laudio.conf /etc/apache2/conf.d/laudio_apache.conf 
    fi
 
-   if [ "$distro" -eq "arch" ]; then 
-      ln -s /etc/laudio/apache/laudio.conf /etc/httpd/conf/extra/laudio_apache.conf 
+   if [ "$distro" == "arch" ]; then 
+      ln -fs /etc/laudio/apache/laudio.conf /etc/httpd/conf/extra/laudio_apache.conf 
       echo "Include conf/extra/laudio_apache.conf" >> /etc/httpd/conf/httpd.conf
    fi
 
-   if [ "$distro" -eq "gentoo" ]; then 
-      ln -s /etc/laudio/apache/laudio.conf /etc/apache2/vhosts.d/laudio_apache.conf 
+   if [ "$distro" == "gentoo" ]; then 
+      ln -fs /etc/laudio/apache/laudio.conf /etc/apache2/vhosts.d/laudio_apache.conf 
    fi
 
 }
@@ -163,28 +165,28 @@ function install_configs {
 function symlink_fonts {
    # FIXME for different distros
    mkdir -p $install_dir/src/laudio/static/upload/themes/default/font
-   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSans-Bold.ttf
-   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSansCondensed.ttf
+   ln -fs /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSans-Bold.ttf
+   ln -fs /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSansCondensed.ttf
 }
 
 function restart_apache {
-   if [ "$distro" -eq "fedora" ]; then 
+   if [ "$distro" == "fedora" ]; then 
       systemctl restart httpd.service
    fi
 
-   if [ "$distro" -eq "debian" ]; then 
+   if [ "$distro" == "debian" ]; then 
       /etc/init.d/apache2 restart
    fi
 
-   if [ "$distro" -eq "arch" ]; then 
+   if [ "$distro" == "arch" ]; then 
       /etc/rc.d/httpd restart
    fi
 
-   if [ "$distro" -eq "gentoo" ]; then 
+   if [ "$distro" == "gentoo" ]; then 
       /etc/init.d/apache2 restart
    fi
 
-   if [ "$distro" -eq "unknown" ]; then 
+   if [ "$distro" == "unknown" ]; then 
       echo "Please restart your apache webserver!"
    fi
 }
