@@ -65,6 +65,10 @@ if [ -f /etc/system-release ]; then
      distro="fedora"
   fi
 fi
+if [ -f /etc/debian_version ]; then
+	distro="debian"
+	# includes Ubuntu, et al.
+fi
 # TODO: check for other distros
 
 # checks if we are root otherwise aborts the execution
@@ -86,7 +90,7 @@ function create_dirs {
 
 # creates the database
 function create_database {
-   python2 src/manage.py syncdb --noinput
+   python2 $install_dir/src/manage.py syncdb --noinput
 }
 
 # developement setup, dont use this in production!
@@ -134,8 +138,8 @@ function install_deps {
 }
 
 function install_configs {
-   mv dist/server_cfg/apache $config_dir
-   mv dist/server_cfg/lighttpd $config_dir
+   cp -R dist/server_cfg/apache $config_dir
+   cp -R dist/server_cfg/lighttpd $config_dir
    
    if [ "$distro" -eq "fedora" ]; then 
       ln -s /etc/laudio/apache/laudio.conf /etc/httpd/conf.d/laudio_apache.conf 
@@ -158,8 +162,9 @@ function install_configs {
 
 function symlink_fonts {
    # FIXME for different distros
-   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf src/laudio/static/upload/themes/default/font/DejaVuSans-Bold.ttf
-   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf src/laudio/static/upload/themes/default/font/DejaVuSansCondensed.ttf
+   mkdir -p $install_dir/src/laudio/static/upload/themes/default/font
+   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSans-Bold.ttf
+   ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf $install_dir/src/laudio/static/upload/themes/default/font/DejaVuSansCondensed.ttf
 }
 
 function restart_apache {
@@ -204,7 +209,7 @@ function production_setup {
    install_configs
    symlink_fonts
    create_database
-   mv src $install_dir
+   cp -R src $install_dir
    mkdir -p $install_dir/src/laudio/static/upload
    chmod 0755 $database_path
    chown $apache_ug:$apache_ug $database_path
