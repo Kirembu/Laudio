@@ -104,7 +104,7 @@ case "$DISTRO" in
     1)
         echo "Installing for Arch Linux"
         echo "Installing Dependencies"
-        pacman -S django python-lxml mutagen apache python-pysqlite sqlite3 mod_wsgi ttf-dejavu ffmpeg
+        pacman -S django python2-lxml mutagen apache python2-pysqlite sqlite3 mod_wsgi ttf-dejavu ffmpeg
         echo "Setting up Apache"  
         APACHE=$ARCH_HTTP_USER
         # check if the entry is already there
