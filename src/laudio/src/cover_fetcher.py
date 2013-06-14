@@ -25,6 +25,7 @@ import os
 import urllib, urllib2
 from urllib2 import URLError, HTTPError
 from lxml import etree
+from lxml.etree import XMLSyntaxError
 
 # Django imports
 from django.conf import settings
@@ -89,5 +90,5 @@ class CoverFetcher(object):
             else:
                 return None
 
-        except (URLError, HTTPError, UnicodeEncodeError):
+        except (URLError, HTTPError, UnicodeEncodeError, XMLSyntaxError):
             return None

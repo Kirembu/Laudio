@@ -6,7 +6,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}themes/{% theme user %}/settings.css" type="text/css" media="all" />
-    <script src="{% url player:javascript 'settings' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'settings' %}" type="text/javascript" charset="utf-8"></script>  
 {% endblock %}
 
 
@@ -17,7 +17,7 @@
 
         <div id="settings">
             <h1>{% trans 'Create a new user' %}</h1>
-            <form method="post" class="section" action="{% url player:config_settings_new_user %}">
+            <form method="post" class="section" action="{% url 'player:config_settings_new_user' %}">
                 {% csrf_token %}
                 <table>
                     {% for field in user_form %}

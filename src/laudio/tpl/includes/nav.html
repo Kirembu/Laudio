@@ -1,7 +1,7 @@
 {% load i18n %}
 <nav>
     <ul class="horizontal_nav">
-        <li><a accesskey="i" href="{% url player:index %}" class="main">l-audio</a></li>
+        <li><a accesskey="i" href="{% url 'player:index' %}" class="main">l-audio</a></li>
         {% if player %}
             <li><a accesskey="q" href="#" class="active" id="sidebar_link">{% blocktrans %}Sidebar{% endblocktrans %}</a></li>
             <li><a accesskey="w" href="#" class="active" id="playlist_link">{% blocktrans %}Playlist{% endblocktrans %}</a></li>
@@ -11,11 +11,11 @@
                 
     <ul id="login" class="horizontal_nav">
        {% if user.is_authenticated %}
-          <li><a accesskey="u" href="{% url player:config_profile %}" {{ nav_profile }}>{% blocktrans %}profile{% endblocktrans %}</a></li>
-          <li><a accesskey="x" href="{% url player:config_settings %}" {{ nav_settings }}>{% blocktrans %}settings{% endblocktrans %}</a></li>
-          <li><a accesskey="l" href="{% url player:logout %}">{% blocktrans %}logout{% endblocktrans %}</a></li>
+          <li><a accesskey="u" href="{% url 'player:config_profile' %}" {{ nav_profile }}>{% blocktrans %}profile{% endblocktrans %}</a></li>
+          <li><a accesskey="x" href="{% url 'player:config_settings' %}" {{ nav_settings }}>{% blocktrans %}settings{% endblocktrans %}</a></li>
+          <li><a accesskey="l" href="{% url 'player:logout' %}">{% blocktrans %}logout{% endblocktrans %}</a></li>
        {% else %}
-          <li><a accesskey="l" href="{% url player:login %}?next={% url player:index %}" {{ nav_login }}>{% blocktrans %}login{% endblocktrans %}</a></li>
+          <li><a accesskey="l" href="{% url 'player:login' %}?next={% url 'player:index' %}" {{ nav_login }}>{% blocktrans %}login{% endblocktrans %}</a></li>
        {% endif %}
     </ul>
 </nav>

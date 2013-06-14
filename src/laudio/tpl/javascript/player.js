@@ -178,7 +178,7 @@ Player.prototype.play = function (row) {
     // value needed for play
     var self = this;
     
-    $.getJSON('{% url player:ajax_song_data %}', { id: queryid }, function (json) {
+    $.getJSON('{% url 'player:ajax_song_data' %}', { id: queryid }, function (json) {
         self.tracknr = json.tracknr;
         self.title = json.title;
         self.artist = json.artist;
@@ -233,7 +233,7 @@ Player.prototype.play = function (row) {
             self.set_title_info();
             
             // set cover
-            $.getJSON('{% url player:ajax_song_cover %}', { id: queryid }, function (json) {
+            $.getJSON('{% url 'player:ajax_song_cover' %}', { id: queryid }, function (json) {
                 $('#songcover').css('background-image', 'url(\'' + json.path + '\')');
             });
         });
@@ -365,7 +365,7 @@ Player.prototype.play_previous = function () {
  * @param id: The id of the song, integer
  */
 Player.prototype.scrobble = function (id) {
-    $.post('{% url player:ajax_song_scrobble %}', { id: this.id });
+    $.post('{% url 'player:ajax_song_scrobble' %}', { id: this.id });
 }
 
 /**
@@ -408,7 +408,7 @@ Player.prototype.set_title_info = function (id) {
  */
 Player.prototype.set_sidebar_db_info = function () {
     var self = this;
-    $.getJSON('{% url player:ajax_db_statistics %}', function (json) {
+    $.getJSON('{% url 'player:ajax_db_statistics' %}', function (json) {
         // set database values in the sidebar
         $('#' + self.databasedata + ' tr:eq(0) td').html(json.numberOfSongs);
         $('#' + self.databasedata + ' tr:eq(1) td').html(json.numberOfDays);

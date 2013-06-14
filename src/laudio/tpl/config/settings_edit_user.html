@@ -6,7 +6,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}themes/{% theme user %}/settings.css" type="text/css" media="all" />
-    <script src="{% url player:javascript 'settings' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'settings' %}" type="text/javascript" charset="utf-8"></script>  
 {% endblock %}
 
 
@@ -18,7 +18,7 @@
         <div id="settings">
             <h1>{% blocktrans with username=config_user.username %}Edit user {{ username }}{% endblocktrans %}</h1>
             <div class="section">            
-                <form method="post" action="{% url player:config_settings_edit_user config_user.id %}">
+                <form method="post" action="{% url 'player:config_settings_edit_user' config_user.id %}">
                     {% csrf_token %}
                     <table>
                         {% for field in user_form %}

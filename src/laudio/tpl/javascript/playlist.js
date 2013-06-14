@@ -31,7 +31,7 @@ function Playlist() {
     // ensure unique row ids
     this.last_row_id = 0;
     
-    this.url_load_playlist = '{% url player:ajax_playlist_load %}';
+    this.url_load_playlist = '{% url "player:ajax_playlist_load" %}';
 }
 
 /**

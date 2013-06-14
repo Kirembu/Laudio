@@ -267,7 +267,7 @@ $(document).ready(function () {
             $('#playlists').fadeIn('fast', function(){
                 $('#playlists ul').fadeOut('fast', function(){
                     $('#playlists .loader').fadeIn('fast', function(){
-                        var url = '{% url player:ajax_playlist_list %}';
+                        var url = '{% url "player:ajax_playlist_list" %}';
                         $('#playlists ul').load(url, function (){
                             $('#playlists .loader').fadeOut('fast', function(){
                                 $('#playlists ul').fadeIn('fast');
@@ -454,7 +454,7 @@ function collection_context_menu(){
                 onclick: function(menuItem, menu) {
                     $('#songlist .selected').each( function(){
                         var id = row_to_id( $(this).attr('id') );
-                        window.open('{% url player:ajax_song_download %}?id=' + id);
+                        window.open('{% url "player:ajax_song_download" %}?id=' + id);
                     });
                 },
                 icon: '{{ MEDIA_URL }}themes/{% theme user %}/img/download.png',
@@ -551,7 +551,7 @@ function playlist_context_menu(){
                 onclick: function(menuItem, menu) {
                     $('#playlist .selected').each( function(){
                             var id = $(this).attr('title');
-                            window.open('{% url player:ajax_song_download %}?id=' + id);
+                            window.open('{% url "player:ajax_song_download" %}?id=' + id);
                     });
                 },
                 icon: '{{ MEDIA_URL }}themes/{% theme user %}/img/download.png',

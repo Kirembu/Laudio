@@ -27,7 +27,7 @@ Public License can be found in `/usr/share/common-licenses/LGPL'.
 import urllib, urllib2
 from time import mktime
 from datetime import datetime, timedelta
-from md5 import md5
+from hashlib import md5
 
 SESSION_ID = None
 POST_URL   = None

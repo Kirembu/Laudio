@@ -13,7 +13,7 @@
         
         <script src="{{ STATIC_URL }}js/lib/jquery/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="{{ STATIC_URL }}js/lib/jquery/jquery-ui-1.8.16.custom.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="{% url player:javascript 'main' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% url 'player:javascript' 'main' %}" type="text/javascript" charset="utf-8"></script>
 
         {% block header %}{% endblock %}
         

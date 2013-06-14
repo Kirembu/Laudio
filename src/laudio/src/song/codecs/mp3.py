@@ -23,7 +23,7 @@ along with Laudio.  If not, see <http://www.gnu.org/licenses/>.
 # System imports
 import os
 from time import time
-from mutagen.mp3 import MP3
+from mutagen.mp3 import MP3, HeaderNotFoundError
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3NoHeaderError
 
@@ -44,9 +44,9 @@ class MP3Song(Song):
         """
         super(MP3Song, self).__init__(path)
         self.codec = 'mp3'
-        song = MP3(self.path)
         
         try:
+            song = MP3(self.path)
             id3 = EasyID3(self.path)
             for key in ('title', 'artist', 'album', 'genre', 'tracknumber', 'date'):
                 attr = id3.get(key, ('',))[0]
@@ -59,7 +59,7 @@ class MP3Song(Song):
                 self.tracknumber = 0
 
         # except no id3 tags
-        except (ID3NoHeaderError, AttributeError):
+        except (ID3NoHeaderError, AttributeError, HeaderNotFoundError):
             for key in ('title', 'artist', 'album', 'genre', 'date'):
                 setattr(self, key, '')
             self.tracknumber = 0

@@ -70,7 +70,7 @@ class Song(models.Model):
     artist = models.ForeignKey('Artist')
     codec = models.CharField(_('Codec'), max_length=10)
     tracknumber = models.IntegerField(_('Tracknumber'))
-    path = models.FilePathField(_('Path'))
+    path = models.FilePathField(_('Path'), max_length=255)
     lastmodified = models.DateTimeField(_('Last metadata change'))
     added =  models.DateTimeField(_('Added'), auto_now_add=True)
     length = models.IntegerField(_('Length'))

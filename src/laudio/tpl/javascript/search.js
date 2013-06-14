@@ -31,9 +31,9 @@ function Search() {
     this.songlist = 'songlist';
 
     // request urls
-    this.url_advanced = '{% url player:ajax_search_advanced %}';
-    this.url_artist_letters = '{% url player:ajax_search_artist_letter %}';
-    this.url_search = '{% url player:ajax_search %}';
+    this.url_advanced = '{% url "player:ajax_search_advanced" %}';
+    this.url_artist_letters = '{% url "player:ajax_search_artist_letter" %}';
+    this.url_search = '{% url "player:ajax_search" %}';
 }
 
 

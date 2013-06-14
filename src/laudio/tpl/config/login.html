@@ -6,7 +6,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}themes/{% theme user %}/settings.css" type="text/css" media="all" />
-    <script src="{% url player:javascript 'settings' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'settings' %}" type="text/javascript" charset="utf-8"></script>  
 {% endblock %}
 
 
@@ -22,7 +22,7 @@
                 <p class="warning">{% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}</p>
                 {% endif %}
 
-                <form method="post" action="{% url player:login %}">
+                <form method="post" action="{% url 'player:login' %}">
                     <input type="hidden" name="next" value="{{ next }}" />
                     {% csrf_token %}
                     <table>

@@ -6,7 +6,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}themes/{% theme user %}/settings.css" type="text/css" media="all" />
-    <script src="{% url player:javascript 'settings' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'settings' %}" type="text/javascript" charset="utf-8"></script>  
 {% endblock %}
 
 
@@ -34,7 +34,7 @@
                 {% for warning in warnings %}
                     <p class="warning">Warning: {{ warning }}</p>
                 {% endfor %}
-                <form method="post" action="{% url player:config_settings %}">
+                <form method="post" action="{% url 'player:config_settings' %}">
                     {% csrf_token %}
                     <table>
                         {% for field in settings_form %}
@@ -55,7 +55,7 @@
             <h1>{% trans 'User Management' %}</h1>
             <div class="section">
                 <ul class="utils">
-                    <li><a href="{% url player:config_settings_new_user %}">{% trans 'new user' %}</a></li>
+                    <li><a href="{% url 'player:config_settings_new_user' %}">{% trans 'new user' %}</a></li>
                 </ul>
                 <table class="lists">
                     <tr>
@@ -72,8 +72,8 @@
                             <td>{{ user.last_name }} {{ user.first_name }}</td>
                             <td>{{ user.is_active|yesno }}</td>
                             <td>{{ user.is_superuser|yesno }}</td>
-                            <td><a href="{% url player:config_settings_delete_user user.id %}">{% trans 'Delete' %}</a></td>
-                            <td><a href="{% url player:config_settings_edit_user user.id %}">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'player:config_settings_delete_user' user.id %}">{% trans 'Delete' %}</a></td>
+                            <td><a href="{% url 'player:config_settings_edit_user' user.id %}">{% trans 'Change' %}</a></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -82,7 +82,7 @@
             <h1>{% trans 'XML API User Management' %}</h1>
             <div class="section">
                 <ul class="utils">
-                    <li><a href="{% url player:xml_config_settings_new_user %}">{% trans 'new user' %}</a></li>
+                    <li><a href="{% url 'player:xml_config_settings_new_user' %}">{% trans 'new user' %}</a></li>
                 </ul>
                 <table class="lists">
                     <tr>
@@ -95,8 +95,8 @@
                         <tr>
                             <td>{{ user.username }}</td>
                             <td>{{ user.is_active|yesno }}</td>
-                            <td><a href="{% url player:xml_config_settings_delete_user user.id %}">{% trans 'Delete' %}</a></td>
-                            <td><a href="{% url player:xml_config_settings_edit_user user.id %}">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'player:xml_config_settings_delete_user' user.id %}">{% trans 'Delete' %}</a></td>
+                            <td><a href="{% url 'player:xml_config_settings_edit_user' user.id %}">{% trans 'Change' %}</a></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -105,7 +105,7 @@
             <h1>{% trans 'Themes' %}</h1>
             <div class="section">
                 <ul class="utils">
-                    <li><a href="{% url player:config_settings_new_theme %}">{% trans 'upload a new theme' %}</a></li>
+                    <li><a href="{% url 'player:config_settings_new_theme' %}">{% trans 'upload a new theme' %}</a></li>
                 </ul>
                 <table class="lists">
                     <tr>
@@ -117,7 +117,7 @@
                             <td>{{ th }}</td>
                             <td> 
                                 {% if th != 'default' %}
-                                    <a href="{% url player:config_settings_delete_theme th %}">{% trans 'Delete' %}</a>
+                                    <a href="{% url 'player:config_settings_delete_theme' th %}">{% trans 'Delete' %}</a>
                                 {% endif %}
                            </td>
                                     

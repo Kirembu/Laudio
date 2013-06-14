@@ -23,15 +23,15 @@
 $(document).ready(function () {
     
     $('#scan_music').click(function(){
-        $.post('{% url player:ajax_scan %}'); 
+        $.post('{% url "player:ajax_scan" %}'); 
     });
     
     $('#reset_music').click(function(){
-        $.post('{% url player:ajax_db_reset %}'); 
+        $.post('{% url "player:ajax_db_reset" %}'); 
     });
     
     $('#tidy_music').click(function(){
-        $.post('{% url player:ajax_db_rmnonexist %}'); 
+        $.post('{% url "player:ajax_db_rmnonexist" %}'); 
     });
     
 });

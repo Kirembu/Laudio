@@ -14,11 +14,11 @@
         <script src="{{ STATIC_URL }}js/lib/soundmanager/script/soundmanager2-nodebug.js" type="text/javascript" charset="utf-8"></script>
     {% endif %}
         
-    <script src="{% url player:javascript 'inc' %}" type="text/javascript" charset="utf-8"></script>  
-    <script src="{% url player:javascript 'player' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% url player:javascript 'search' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% url player:javascript 'playlist' %}" type="text/javascript" charset="utf-8"></script>  
-    <script src="{% url player:javascript 'ui' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% url 'player:javascript' 'inc' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'player' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% url 'player:javascript' 'search' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% url 'player:javascript' 'playlist' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'ui' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
 

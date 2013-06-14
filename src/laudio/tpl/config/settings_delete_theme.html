@@ -6,7 +6,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}themes/{% theme user %}/settings.css" type="text/css" media="all" />
-    <script src="{% url player:javascript 'settings' %}" type="text/javascript" charset="utf-8"></script>  
+    <script src="{% url 'player:javascript' 'settings' %}" type="text/javascript" charset="utf-8"></script>  
 {% endblock %}
 
 
@@ -18,7 +18,7 @@
         <div id="settings">
             <h1>{% blocktrans with name=themename %}Do you really want to delete the theme: {{ name }}?{% endblocktrans %}</h1>
             <div class="section">
-                <form method="post" action="{% url player:config_settings_delete_theme themename %}">
+                <form method="post" action="{% url 'player:config_settings_delete_theme' themename %}">
                     {% csrf_token %}
                     <p class="submit confirm"><input onclick="history.back()" type="button" value="{% blocktrans %}no{% endblocktrans %}" />
                     <input type="submit" value="{% blocktrans %}confirm{% endblocktrans %}" /></p>

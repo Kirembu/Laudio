@@ -16,7 +16,7 @@
         <div id="install">
             <h1>{% blocktrans %}Welcome to l-audio. Please create your superuser account!{% endblocktrans %}</h1>
             <div class="section">
-                <form action="{% url player:setup %}" method="post">
+                <form action="{% url 'player:setup' %}" method="post">
                     {% csrf_token %}
                     <table>
                         {% for field in form %}
