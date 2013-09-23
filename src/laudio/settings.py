@@ -33,8 +33,12 @@ LAUDIO_CFG = {
     'LIGHTTPD_CFG': '/etc/laudio/lighttpd/laudio.conf',    
 }
 CONF = LaudioConfig(LAUDIO_CFG)
-LAUDIO_URL = CONF.url
-#LAUDIO_URL = ''
+# This should work, but it doesn't
+# We'll have to hardcode the url
+## LAUDIO_URL = CONF.url
+
+LAUDIO_URL = '/'
+
 LAUDIO_SQLITE_PATH = '/var/lib/laudio/laudio.db'
 DEBUG_LOG = '/var/log/laudio/debug.log'
 SCAN_LOG = '/var/log/laudio/scan.log'

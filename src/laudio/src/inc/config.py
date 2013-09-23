@@ -113,7 +113,10 @@ class LaudioConfig(object):
             with open(self.apacheConfig, 'r') as confFile:
                 conf = confFile.read()
                 regex = r'WSGIScriptAlias (.*) .*wsgi/django.wsgi'
-                url = re.search(regex, conf).group(1)
+                # FIXME: This could return None
+                ## url = re.search(regex, conf).group(1)
+                url = 'audio.patrick.co.ke/'
+                
                 if url.endswith('/'):
                     url = url[:-1]
                 self.url = url

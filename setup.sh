@@ -70,8 +70,7 @@ case "$DISTRO" in
                 rm -r $elem
             fi
         done
-        mv dist/server_cfg/apache $LAUDIO_CONF_DIR
-        mv dist/server_cfg/lighttpd $LAUDIO_CONF_DIR
+        cp -r dist/server_cfg/ $LAUDIO_CONF_DIR
         rm -rf /etc/apache2/conf.d/laudio_apache.conf 
         ln -s /etc/laudio/apache/laudio.conf /etc/apache2/conf.d/laudio_apache.conf 
         echo "Creating Directories and installing laudio"
@@ -82,14 +81,15 @@ case "$DISTRO" in
             chown -R $APACHE:$APACHE $elem
             chmod -R 0755 $elem
         done
-        mv laudio $INSTALL_DIR
+        cp -r src/laudio $INSTALL_DIR
+        cp src/laudio/laudio.cfg $LAUDIO_CONF_DIR
         chown -R $APACHE:$APACHE $INSTALL_DIR
         chmod -R 0755 $INSTALL_DIR
         
         echo "Symlinking fonts"
-        sudo rm $INSTALL_DIR/laudio/static/upload/themes/default/fonts/*
         ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf $INSTALL_DIR/laudio/static/upload/themes/default/font/DejaVuSans-Bold.ttf
         ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSansCondensed.ttf $INSTALL_DIR/laudio/static/upload/themes/default/font/DejaVuSansCondensed.ttf
+        ln -s /var/music $INSTALL_DIR/laudio/static/audio
         
         echo "Creating Database"
         python $INSTALL_DIR/laudio/manage.py syncdb --noinput
